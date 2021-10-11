@@ -29,7 +29,8 @@ public class TransferController {
     public void saveTransfer(@RequestBody TransferRequest request) {
         log.info("Received transfer request {}", request);
         log.info("Checking available funds");
-        AccountDto account = productService.findCustomersAccount(request.getSenderAccount());
+        AccountDto account
+                = productService.findCustomersAccount(request.getSenderAccount());
         if (account.getAvailableFunds().compareTo(request.getAmount()) >= 0) {
             log.info("Available funds checked");
             var transfer = mapper.mapToTransfer(request);
